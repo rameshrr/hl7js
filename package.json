@@ -1,0 +1,22 @@
+{
+  "name": "hl7js",
+  "version": "1.0.0",
+  "description": "Javascript library for HL7 parsing",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://rameshrr@github.com/rameshrr/hl7js.git"
+  },
+  "keywords": [
+    "HL7"
+  ],
+  "author": "Ramesh R",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rameshrr/hl7js/issues"
+  },
+  "homepage": "https://github.com/rameshrr/hl7js"
+}
