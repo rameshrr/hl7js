@@ -1,0 +1,9 @@
+MSH|^~\&|MESA_RPT_MGR|EAST_RADIOLOGY|REPOSITORY|XYZ|||ORU^R01|MESA3b781ae8|P|2.5||||||||
+PID|||CR3^^^ADT1||CRTHREE^PAUL|||||||||||||PatientAcct||||||||||||
+OBR||||4550|||20010501141500.0000||||||||||||||||||F||||||||||||||||||
+OBX|1|HD|SR Instance UID||1.113654.1.2001.30.2.1||||||F||||||
+OBX|2|TX|SR Text||Lungs expanded and clear. Conclusions Normal PA chest x-ray.||||||F||||||
+OBR||||4551|||20010501141500||||||||||||||||||F||||||||||||||||||
+OBX|1|HD|SR Instance UID||1.113654.1.2001.10.2.1.603||||||F||||||
+OBX|2|HD|Study Instance UID|1|1.113654.1.2001.10||||||F||||||
+OBX|3|HD|Series Instance UID|1|1.113654.1.2001.10.1||||||F||||||
