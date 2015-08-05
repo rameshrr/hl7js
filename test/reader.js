@@ -16,85 +16,30 @@ var Reader = require(__dirname + '/../index').Reader;
 var adtPath = 'samples/adt.hl7';
 var oruPath = 'samples/oru.hl7';
 
-var adtGrammar = [
-    {
-        id: 'MSH',
-        required: true
-    },
-    {
-        id: 'PID',
-        required: true
-    },
-    {
-        id: 'NK1',
-        required: false
-    },
-    {
-        id: 'PV1',
-        required: true
-    }
-];
-
-var oruGrammar = [
-    {
-        id: 'MSH',
-        required: true
-    },
-    {
-        id: 'PID',
-        required: true
-    },
-    {
-        id: 'OBR',
-        required: true,
-        isGroup: true,
-        isArray: true,
-
-        grammar: [
-            {
-                id: 'OBX',
-                required: true,
-                isArray: true
-            }
-        ]
-    }
-];
-
-/// Basic Parsing
+//
+/// JSON Parsing
 fs.readFile(path.join(__dirname, adtPath), function (err, buffer) {
     var reader = new Reader();
 
-    reader.read(buffer.toString(), function (err, hl7Data) {
+    reader.read(buffer.toString(), 'MSH PID [{NK1}] PV1 [PV2]', function (err, hl7Data, hl7Json) {
         console.log(err);
-        console.log(hl7Data);
-    });
-});
 
-/// JSON Parsing
-fs.readFile(path.join(__dirname, adtPath), function (err, buffer) {
-    var reader = new Reader('JSON', {
-        grammar: adtGrammar
-    });
-
-    reader.read(buffer.toString(), function (err, hl7Data, hl7Json) {
-        console.log(err);
-        console.log(hl7Data);
-        console.log(hl7Json);
-
-        var patientName = hl7Json['PID'][5];
+        if (!err) {
+            var patientName = hl7Json['PID'][5];
+            console.log('ADT->Patient name: ', patientName);
+        }
     });
 });
 
 fs.readFile(path.join(__dirname, oruPath), function (err, buffer) {
-    var reader = new Reader('JSON', {
-        grammar: oruGrammar
-    });
+    var reader = new Reader();
 
-    reader.read(buffer.toString(), function (err, hl7Data, hl7Json) {
+    reader.read(buffer.toString(), 'MSH PID [{OBR {OBX}}]', function (err, hl7Data, hl7Json) {
         console.log(err);
-        console.log(hl7Data);
-        console.log(hl7Json);
 
-        var patientName = hl7Json['PID'][5]; /// Similar pattern: hl7Json['PID'].fields[5].value ==> For advanced usage
+        if (!err) {
+            var patientName = hl7Json['PID'][5]; /// Similar pattern: hl7Json['PID'].fields[5].value ==> For advanced usage
+            console.log('ORU->Patient name: ', patientName);
+        }
     });
 });

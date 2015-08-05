@@ -25,5 +25,8 @@
   "homepage": "https://github.com/rameshrr/hl7js",
   "directories": {
     "test": "test"
+  },
+  "dependencies": {
+    "hl7js-grammar": "0.0.2"
   }
 }
