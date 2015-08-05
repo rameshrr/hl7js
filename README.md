@@ -19,7 +19,8 @@ var reader = new Reader();
 ```javascript
 
 /// Basic Parsing
-fs.readFile(path.join(__dirname, adtPath), function (err, buffer) {
+var reader = new Reader('BASIC');
+fs.readFile(hl7_file_path, function (err, buffer) {
 
     reader.read(buffer.toString(), function (err, hl7Data) {
         console.log(err);
@@ -28,66 +29,21 @@ fs.readFile(path.join(__dirname, adtPath), function (err, buffer) {
 });
 
 ```
-## Parsing with Grammar
 
-### Defining grammar
+## Reading With Grammar
+### reader.read(buffer, grammarExpression, callback)
+
 ```javascript
 
-/// Format
-var grammar = [
-{
-    id: 'Segment_ID',
-    required: true,
-    isGroup: true,
-    isArray: true,
+fs.readFile(hl7_file_path, function (err, buffer) {
 
-    grammar: [
-    ]
-];
+    reader.read(buffer.toString(), 'MSH PID [{OBR {OBX}}]', function (err, hl7Data, hl7Json) {
+            console.log(err);
 
-/// Example
-var oruGrammar = [
-    {
-        id: 'MSH',
-        required: true
-    },
-    {
-        id: 'PID',
-        required: true
-    },
-    {
-        id: 'OBR',
-        required: true,
-        isGroup: true,
-        isArray: true,
-
-        grammar: [
-            {
-                id: 'OBX',
-                required: true,
-                isArray: true
+            if (!err) {
+                var patientName = hl7Json['PID'][5]; /// Similar pattern: hl7Json['PID'].fields[5].value ==> For advanced usage
+                console.log('ORU->Patient name: ', patientName);
             }
-        ]
-    }
-];
-
-```
-
-### Reading With Grammar
-```javascript
-
-var reader = new Reader('JSON', {
-    grammar: adtGrammar
-});
-
-fs.readFile(path.join(__dirname, oruPath), function (err, buffer) {
-
-    reader.read(buffer.toString(), function (err, hl7Data, hl7Json) {
-        console.log(err);
-        console.log(hl7Data);
-        console.log(hl7Json);
-
-        var patientName = hl7Json['PID'][5]; /// Similar pattern: hl7Json['PID'].fields[5].value ==> For advanced usage
     });
 });
 
