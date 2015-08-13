@@ -50,12 +50,19 @@ fs.readFile(hl7_file_path, function (err, buffer) {
 ```
 
 # Documentation
+### Reading header fields
+```javascript
+
+var messageType = hl7Data.mshSegment.messageType;
+
+```
+
 ### Reading patient name
 ```javascript
 
 var patientName = hl7Json['PID'][5];
 /// (or)
-var patientName = hl7Json['PID'].fields[5].value
+var patientName = hl7Json['PID'].fields[5].value;
 
 ```
 

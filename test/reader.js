@@ -40,6 +40,10 @@ fs.readFile(path.join(__dirname, oruPath), function (err, buffer) {
         if (!err) {
             var patientName = hl7Json['PID'][5]; /// Similar pattern: hl7Json['PID'].fields[5].value ==> For advanced usage
             console.log('ORU->Patient name: ', patientName);
+
+            /// Reading Header fields
+            var messageType = hl7Data.mshSegment.messageType;
+            console.log('MSH->Message Type: ', messageType);
         }
     });
 });
