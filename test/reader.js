@@ -19,6 +19,7 @@ var oruPath = 'samples/oru.hl7';
 //
 /// JSON Parsing
 fs.readFile(path.join(__dirname, adtPath), function (err, buffer) {
+    console.time('ADT_Time');
     var reader = new Reader();
 
     reader.read(buffer.toString(), 'MSH PID [{NK1}] PV1 [PV2]', function (err, hl7Data, hl7Json) {
@@ -28,10 +29,14 @@ fs.readFile(path.join(__dirname, adtPath), function (err, buffer) {
             var patientName = hl7Json['PID'][5];
             console.log('ADT->Patient name: ', patientName);
         }
+
+        console.timeEnd('ADT_Time');
     });
 });
 
 fs.readFile(path.join(__dirname, oruPath), function (err, buffer) {
+    console.time('ORU_Time');
+
     var reader = new Reader();
 
     reader.read(buffer.toString(), 'MSH PID [{OBR {OBX}}]', function (err, hl7Data, hl7Json) {
@@ -45,5 +50,7 @@ fs.readFile(path.join(__dirname, oruPath), function (err, buffer) {
             var messageType = hl7Data.mshSegment.messageType;
             console.log('MSH->Message Type: ', messageType);
         }
+
+        console.timeEnd('ORU_Time');
     });
 });

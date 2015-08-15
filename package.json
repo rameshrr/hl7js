@@ -27,6 +27,7 @@
     "test": "test"
   },
   "dependencies": {
-    "hl7js-grammar": "0.0.2"
+    "hl7js-grammar": "0.0.2",
+    "kalam": "0.0.3"
   }
 }

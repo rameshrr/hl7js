@@ -9,8 +9,10 @@
 
 'use strict';
 
-var Reader = require(__dirname + '/lib/reader');
+var Reader = require(__dirname + '/lib/reader'),
+    Writer = require(__dirname + '/lib/writer');
 
 module.exports = {
-    Reader: Reader
+    Reader: Reader,
+    Writer: Writer
 };
