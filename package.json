@@ -1,6 +1,6 @@
 {
   "name": "hl7js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Javascript library for HL7 parsing",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,10 @@
     "hl7",
     "hl7parser",
     "hl7writer",
+    "hl7validator",
+    "hl7reader",
+    "node hl7",
+    "hl7 javascript",
     "hl7engine",
     "hl7js"
   ],
@@ -28,6 +32,6 @@
   },
   "dependencies": {
     "hl7js-grammar": "0.0.2",
-    "kalam": "0.0.3"
+    "kalam": "0.0.4"
   }
 }

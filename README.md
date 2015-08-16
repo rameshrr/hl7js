@@ -7,7 +7,7 @@ install via [NPM](https://www.npmjs.com/):
 > npm install hl7js
 
 # Usage
-## Initializing:
+## Initializing Reader:
 ```javascript
 
 var Reader = require('hl7js').Reader;
@@ -49,7 +49,6 @@ fs.readFile(hl7_file_path, function (err, buffer) {
 
 ```
 
-# Documentation
 ### Reading header fields
 ```javascript
 
@@ -63,6 +62,69 @@ var messageType = hl7Data.mshSegment.messageType;
 var patientName = hl7Json['PID'][5];
 /// (or)
 var patientName = hl7Json['PID'].fields[5].value;
+
+```
+
+## Initializing Writer: (Alpha version)
+```javascript
+
+var Writer = require('hl7js').Writer;
+
+/// Initializing writer with default delimiters
+var writer = new Writer();
+/// Initializing writer with user defined delimiters
+var writer = new Writer({
+    lineSeparator: '0xD 0xA',
+    framePrefix: '',
+    frameSuffix: '',
+    fieldSeparater: '|',
+    componentSeparater: '^',
+    fieldRepeatSeparater: '~',
+    escapeCharacter: '\\',
+    subComponentSeparater: '&'
+});
+
+```
+
+## writer.addHeader(options) - adding MSH
+```javascript
+
+writer.addHeader({
+    sendingApplication: 's_app',
+    sendingFacility: 'a_facility',
+    receivingApplication: 'r_app',
+    receivingFacility: 'r_facility',
+    dateTimeOfMessage: 'dt',
+    security: '',
+    messageType: 'ADT^A01',
+    messageControlId: '123',
+    processingId: '',
+    versionId: '2.5',
+    sequenceNo: '',
+    continuationPointer: '',
+    acceptAckType: '',
+    applicationAckType: '',
+    countryCode: '',
+    characterSet: '',
+    messageLanguage: ''
+});
+
+```
+
+## writer.addSegment(segmentId [, dataArray]) - Adding Other segments
+```javascript
+
+writer.addSegment('PID', ['name', 1, 2, ['lname', 'fname'], 'eee']);
+writer.addSegment('IN1', ['1']);
+writer.addSegment('IN2');
+
+```
+
+## writer.toString() - Reads HL7 Text
+```javascript
+
+var hl7Text = writer.toString();
+console.log(hl7Text);
 
 ```
 

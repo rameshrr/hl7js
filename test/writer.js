@@ -15,7 +15,7 @@ var fs = require('fs'),
     path = require('path');
 
 var writer = new Writer({
-    lineSeparator: '0xC 0xD',
+    lineSeparator: '0xD 0xA',
     framePrefix: '',
     frameSuffix: '',
     fieldSeparater: '|',
@@ -47,6 +47,7 @@ writer.addHeader({
 
 writer.addSegment('PID', ['name', 1, 2, ['lname', 'fname'], 'eee']);
 writer.addSegment('IN1', ['1']);
+writer.addSegment('IN2');
 
 var hl7Text = writer.toString();
 console.log(hl7Text);
