@@ -20,9 +20,10 @@ var oruPath = 'samples/oru.hl7';
 /// JSON Parsing
 fs.readFile(path.join(__dirname, adtPath), function (err, buffer) {
     console.time('ADT_Time');
-    var reader = new Reader();
+    var reader = new Reader('JSON');
 
-    reader.read(buffer.toString(), 'MSH PID [{NK1}] PV1 [PV2]', function (err, hl7Data, hl7Json) {
+    //reader.read(buffer.toString(), 'MSH PID [{NK1}] PV1 [PV2]', function (err, hl7Data, hl7Json) {
+    reader.read(buffer.toString(), function (err, hl7Data, hl7Json) {
         console.log(err);
 
         if (!err) {
